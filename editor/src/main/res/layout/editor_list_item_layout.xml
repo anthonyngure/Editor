@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableRow xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView
+        android:layout_column="1"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        android:id="@+id/lblOrder"
+        android:textStyle="bold"
+        android:text="•"/>
+    <ke.co.toshngure.editor.components.CustomEditText
+        android:layout_column="2"
+        android:id="@+id/txtText"
+        android:layout_weight="1"
+        android:focusableInTouchMode="true"
+        style="@style/WysiwygEditText"
+        android:text=""
+        android:layout_width="wrap_content"
+        android:background="@drawable/invisible_edit_text"/>
+
+    <TextView
+        android:layout_column="2"
+        android:id="@+id/lblText"
+        android:layout_weight="1"
+        android:visibility="gone"
+        style="@style/WysiwygEditText"
+        android:layout_width="wrap_content"/>
+
+</TableRow>
