@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -38,7 +39,7 @@ public class EditorActivity extends AppCompatActivity {
         textEditor = findViewById(R.id.textEditor);
         if (getIntent().getExtras() != null) {
             String text = getIntent().getExtras().getString(EXTRA_TEXT);
-            if (text != null) {
+            if (!TextUtils.isEmpty(text)) {
                 textEditor.render(text);
             } else {
                 textEditor.render();
