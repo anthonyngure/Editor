@@ -20,7 +20,6 @@ import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.view.ContextThemeWrapper;
 import android.text.Editable;
 import android.text.Html;
 import android.text.InputType;
@@ -37,20 +36,20 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import ke.co.toshngure.editor.EditorCore;
-import com.github.irshulx.R;
-import ke.co.toshngure.editor.utilities.FontCache;
-import ke.co.toshngure.editor.models.EditorTextStyle;
-import ke.co.toshngure.editor.models.EditorControl;
-import ke.co.toshngure.editor.models.EditorType;
-import ke.co.toshngure.editor.models.Op;
-import ke.co.toshngure.editor.models.RenderType;
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
 import java.util.Map;
+
+import ke.co.toshngure.editor.EditorCore;
+import ke.co.toshngure.editor.R;
+import ke.co.toshngure.editor.models.EditorControl;
+import ke.co.toshngure.editor.models.EditorTextStyle;
+import ke.co.toshngure.editor.models.EditorType;
+import ke.co.toshngure.editor.models.Op;
+import ke.co.toshngure.editor.models.RenderType;
+import ke.co.toshngure.editor.utilities.FontCache;
 
 /**
  * Created by mkallingal on 4/30/2016.
@@ -58,14 +57,18 @@ import java.util.Map;
 public class InputExtensions {
     public static final int HEADING = 0;
     public static final int CONTENT = 1;
+    EditorCore editorCore;
     private int H1TEXTSIZE = 23;
     private int H2TEXTSIZE = 20;
     private int H3TEXTSIZE = 18;
     private int NORMALTEXTSIZE = 16;
     private int fontFace = R.string.fontFamily__serif;
-    EditorCore editorCore;
     private Map<Integer, String> contentTypeface;
     private Map<Integer, String> headingTypeface;
+
+    public InputExtensions(EditorCore editorCore) {
+        this.editorCore = editorCore;
+    }
 
     public int getH1TextSize() {
         return this.H1TEXTSIZE;
@@ -107,7 +110,6 @@ public class InputExtensions {
         this.fontFace = fontFace;
     }
 
-
     public Map<Integer, String> getContentTypeface() {
         return contentTypeface;
     }
@@ -124,11 +126,6 @@ public class InputExtensions {
         this.headingTypeface = headingTypeface;
     }
 
-
-    public InputExtensions(EditorCore editorCore) {
-        this.editorCore = editorCore;
-    }
-
     CharSequence GetSanitizedHtml(String text) {
         Spanned __ = Html.fromHtml(text);
         CharSequence toReplace = noTrailingwhiteLines(__);
@@ -142,7 +139,7 @@ public class InputExtensions {
 
 
     private TextView getNewTextView(String text) {
-        final TextView textView = new TextView(new ContextThemeWrapper(this.editorCore.getContext(), R.style.WysiwygEditText));
+        final TextView textView = new TextView(this.editorCore.getContext());
         addEditableStyling(textView);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         params.setMargins(0, 0, 0, (int) editorCore.getContext().getResources().getDimension(R.dimen.edittext_margin_bottom));
@@ -156,7 +153,7 @@ public class InputExtensions {
     }
 
     public CustomEditText getNewEditTextInst(final String hint, String text) {
-        final CustomEditText editText = new CustomEditText(new ContextThemeWrapper(this.editorCore.getContext(), R.style.WysiwygEditText));
+        final CustomEditText editText = new CustomEditText(this.editorCore.getContext());
         addEditableStyling(editText);
         editText.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         if (hint != null) {

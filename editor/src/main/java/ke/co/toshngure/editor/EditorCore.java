@@ -18,8 +18,6 @@ import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.github.irshulx.R;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,16 +39,16 @@ import ke.co.toshngure.editor.models.RenderType;
  */
 public class EditorCore extends LinearLayout {
     /*
-    * EditText initializors
-    */
-    public String placeHolder = null;
-    /*
     * Divider initializors
     */
     private final String SHAREDPREFERENCE = "QA";
+    /*
+    * EditText initializors
+    */
+    public String placeHolder = null;
+    protected LinearLayout __parentView;
     private Context __context;
     private Activity __activity;
-    protected LinearLayout __parentView;
     private RenderType __renderType;
     private Resources __resources;
     private View __activeView;
@@ -228,7 +226,7 @@ public class EditorCore extends LinearLayout {
                 return currentIndex;
             }
         } else if (tag == EditorType.UL_LI || tag == EditorType.OL_LI) {
-            EditText _text = (EditText) _view.findViewById(R.id.txtText);
+            EditText _text = _view.findViewById(R.id.txtText);
             if (_text.getText().length() > 0) {
 
             }
@@ -403,7 +401,7 @@ public class EditorCore extends LinearLayout {
                     int _rowCount = table.getChildCount();
                     for (int j = 0; j < _rowCount; j++) {
                         View row = table.getChildAt(j);
-                        EditText li = (EditText) row.findViewById(R.id.txtText);
+                        EditText li = row.findViewById(R.id.txtText);
                         node.content.add(Html.toHtml(li.getText()));
                     }
                     list.add(node);

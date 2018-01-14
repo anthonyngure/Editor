@@ -19,8 +19,8 @@ import android.app.Activity;
 import android.view.View;
 import android.widget.Toast;
 
-import com.github.irshulx.R;
 import ke.co.toshngure.editor.EditorCore;
+import ke.co.toshngure.editor.R;
 import ke.co.toshngure.editor.models.EditorType;
 import ke.co.toshngure.editor.models.RenderType;
 
@@ -28,8 +28,8 @@ import ke.co.toshngure.editor.models.RenderType;
  * Created by mkallingal on 5/1/2016.
  */
 public class DividerExtensions {
-    private int dividerLayout = R.layout.editor_divider_layout;
     EditorCore editorCore;
+    private int dividerLayout = R.layout.editor_divider_layout;
 
     public DividerExtensions(EditorCore editorCore) {
         this.editorCore = editorCore;

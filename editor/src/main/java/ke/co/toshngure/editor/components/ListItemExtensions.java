@@ -36,9 +36,8 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-import com.github.irshulx.R;
-
 import ke.co.toshngure.editor.EditorCore;
+import ke.co.toshngure.editor.R;
 import ke.co.toshngure.editor.models.EditorControl;
 import ke.co.toshngure.editor.models.EditorType;
 import ke.co.toshngure.editor.models.RenderType;
@@ -47,9 +46,9 @@ import ke.co.toshngure.editor.models.RenderType;
  * Created by mkallingal on 5/1/2016.
  */
 public class ListItemExtensions {
-    EditorCore editorCore;
     public static final int POSITION_START = 0;
     public static final int POSITION_END = 1;
+    EditorCore editorCore;
     private int listItemTemplate = R.layout.editor_list_item_layout;
 
     public ListItemExtensions(EditorCore editorCore) {
@@ -79,8 +78,8 @@ public class ListItemExtensions {
 
     public View AddListItem(TableLayout layout, boolean isOrdered, String text) {
         final View childLayout = ((Activity) editorCore.getContext()).getLayoutInflater().inflate(this.listItemTemplate, null);
-        final CustomEditText editText = (CustomEditText) childLayout.findViewById(R.id.txtText);
-        final TextView _order = (TextView) childLayout.findViewById(R.id.lblOrder);
+        final CustomEditText editText = childLayout.findViewById(R.id.txtText);
+        final TextView _order = childLayout.findViewById(R.id.lblOrder);
         _order.setTypeface(Typeface.create(editorCore.getInputExtensions().getFontFace(), Typeface.BOLD));
         editText.setTypeface(Typeface.create(editorCore.getInputExtensions().getFontFace(), Typeface.NORMAL));
         if (isOrdered) {
@@ -175,7 +174,7 @@ public class ListItemExtensions {
                 }
             }, 0);
         } else {
-            final TextView textView = (TextView) childLayout.findViewById(R.id.lblText);
+            final TextView textView = childLayout.findViewById(R.id.lblText);
             textView.setTypeface(editorCore.getInputExtensions().getTypeface(InputExtensions.CONTENT, Typeface.NORMAL));
 
             /*
@@ -215,10 +214,10 @@ public class ListItemExtensions {
         _table.setTag(type);
         for (int i = 0; i < _table.getChildCount(); i++) {
             View _childRow = _table.getChildAt(i);
-            CustomEditText editText = (CustomEditText) _childRow.findViewById(R.id.txtText);
+            CustomEditText editText = _childRow.findViewById(R.id.txtText);
             editText.setTag(editorCore.createTag(EditorType.OL_LI));
             _childRow.setTag(editorCore.createTag(EditorType.OL_LI));
-            TextView _bullet = (TextView) _childRow.findViewById(R.id.lblOrder);
+            TextView _bullet = _childRow.findViewById(R.id.lblOrder);
             _bullet.setText(String.valueOf(i + 1) + ".");
         }
     }
@@ -229,17 +228,17 @@ public class ListItemExtensions {
         _table.setTag(type);
         for (int i = 0; i < _table.getChildCount(); i++) {
             View _childRow = _table.getChildAt(i);
-            CustomEditText _EditText = (CustomEditText) _childRow.findViewById(R.id.txtText);
+            CustomEditText _EditText = _childRow.findViewById(R.id.txtText);
             _EditText.setTag(editorCore.createTag(EditorType.UL_LI));
             _childRow.setTag(editorCore.createTag(EditorType.UL_LI));
-            TextView _bullet = (TextView) _childRow.findViewById(R.id.lblOrder);
+            TextView _bullet = _childRow.findViewById(R.id.lblOrder);
             _bullet.setText("•");
         }
     }
 
 
     public String getTextFromListItem(View row) {
-        CustomEditText _text = (CustomEditText) row.findViewById(R.id.txtText);
+        CustomEditText _text = row.findViewById(R.id.txtText);
         return _text.getText().toString();
     }
 
@@ -367,7 +366,7 @@ public class ListItemExtensions {
         //TODO, make sure that if OL, all the items are ordered numerically
         for (int i = 0; i < _table.getChildCount(); i++) {
             TableRow tableRow = (TableRow) _table.getChildAt(i);
-            TextView _bullet = (TextView) tableRow.findViewById(R.id.lblOrder);
+            TextView _bullet = tableRow.findViewById(R.id.lblOrder);
             _bullet.setText(String.valueOf(i + 1) + ".");
         }
     }
@@ -388,7 +387,7 @@ public class ListItemExtensions {
              * check if the index of the deleted row is <0, if so, move the focus to the previous li
              */
             TableRow focusrow = (TableRow) _table.getChildAt(indexOnList - 1);
-            EditText text = (EditText) focusrow.findViewById(R.id.txtText);
+            EditText text = focusrow.findViewById(R.id.txtText);
             /**
              * Rearrange the nodes
              */
@@ -412,7 +411,7 @@ public class ListItemExtensions {
         if (tableLayout.getChildCount() > 0) {
             TableRow tableRow = (TableRow) tableLayout.getChildAt(position == POSITION_START ? 0 : count - 1);
             if (tableRow != null) {
-                EditText editText = (EditText) tableRow.findViewById(R.id.txtText);
+                EditText editText = tableRow.findViewById(R.id.txtText);
                 if (editText.requestFocus()) {
                     editText.setSelection(editText.getText().length());
                 }
@@ -437,7 +436,7 @@ public class ListItemExtensions {
         }
         TableRow prevRow = (TableRow) tableLayout.getChildAt(indexOnTable - 1);
         if (prevRow != null) {
-            CustomEditText editText = (CustomEditText) tableRow.findViewById(R.id.txtText);
+            CustomEditText editText = tableRow.findViewById(R.id.txtText);
             if (editText.requestFocus()) {
                 editText.setSelection(editText.getText().length());
             }

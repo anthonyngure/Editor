@@ -11,11 +11,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.github.irshulx.R;
-
 import ke.co.toshngure.editor.models.EditorTextStyle;
 
-public class EditorActivity extends AppCompatActivity {
+public class EditorActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static final String EXTRA_TEXT = "extra_text";
 
@@ -47,6 +45,15 @@ public class EditorActivity extends AppCompatActivity {
         } else {
             textEditor.render();
         }
+
+        findViewById(R.id.actionBold).setOnClickListener(this);
+        findViewById(R.id.actionItalic).setOnClickListener(this);
+        findViewById(R.id.actionIndent).setOnClickListener(this);
+        findViewById(R.id.actionOutdent).setOnClickListener(this);
+        findViewById(R.id.actionBulletsList).setOnClickListener(this);
+        findViewById(R.id.actionNumbersList).setOnClickListener(this);
+        findViewById(R.id.actionBreak).setOnClickListener(this);
+        findViewById(R.id.actionInsertLink).setOnClickListener(this);
     }
 
     @Override
@@ -81,7 +88,9 @@ public class EditorActivity extends AppCompatActivity {
         this.finish();
     }
 
-    public void updateStyle(View view){
+
+    @Override
+    public void onClick(View view) {
         if (view.getId() == R.id.actionBold){
             textEditor.updateTextStyle(EditorTextStyle.BOLD);
         }
